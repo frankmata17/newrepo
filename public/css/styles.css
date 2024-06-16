@@ -7,13 +7,31 @@
 
 body {
   font-family: Arial, sans-serif;
-  background-image: url('/newrepo/public/images/site/checkerboard.jpg');
-  background-repeat: repeat;
-  margin: 0;
-  padding: 0;
-  text-align: center;
+  background-color: white;
+  margin: 50px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  position: relative;
+  border-style: solid;
+  border-radius: 10px;
+  border-color: rgb(67, 193, 235);
 }
 
+/* body::before {
+  content: "";
+  position: fixed;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background-image: url('/images/site/checkerboard.jpg');
+  background-size: 200px;
+  background-repeat: repeat;
+  z-index: -1;
+} */
 h1 {
   color: #333;
 }
@@ -36,43 +54,150 @@ nav a {
   padding: 10px;
 }
 
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
 .delorean-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 20px;
 }
 
 .delorean {
-  max-width: 50%;
+  max-width: 100%;
   height: auto;
 }
 
 .delorean-info {
-  text-align: left;
-  padding-left: 20px;
+  position: absolute;
+  top: 41%;
+  transform: translateY(-50%);
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color:rgb(67, 193, 235);
+  max-width: 300px;
+  text-align: center;
+}
+.delorean-info button {
+  background-color: rgb(67, 193, 235);
+  color: black;
+  font-weight: bold;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+.sections-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-top: 20px;
 }
 
 .upgrades, .reviews {
-  margin: 20px 0;
+  flex-basis: calc(50% - 10px);
 }
 
 .upgrades .upgrade-items {
   display: flex;
   justify-content: space-around;
+  flex-wrap: wrap;
 }
 
 .upgrade-item {
   text-align: center;
+  width: calc(50% - 20px);
+  margin: 5px;
+  background-color: rgb(67, 193, 235);
+  padding: 10px;
+  box-shadow: 0 0 5px rgba(0,0,0,0.2);
+  border-color: black;
 }
 
 .upgrade-item img {
-  width: 100px;
+  position:sticky;
+  width: auto;
   height: 100px;
+}
+.reviews ul {
+  padding: 0;
+  text-align: left;
 }
 
 footer {
   background-color: black;
   color: white;
   padding: 10px;
+}
+#tools {
+  text-align: right;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 600px) {
+  .sections-container {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .upgrades,
+  .reviews {
+    flex-basis: 100%;
+  }
+
+  .reviews {
+    order: -1;
+    margin-bottom: 20px;
+  }
+
+  .upgrades .upgrade-items,
+  .reviews ul {
+    flex-direction: column;
+  }
+
+  .delorean-info {
+    position: relative;
+    left: 0;
+    top: auto;
+    transform: none;
+    margin-bottom: 20px;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: rgb(67, 193, 235);
+    max-width: 100%;
+    text-align: center;
+  }
+
+  .delorean-info button {
+    width: 100%;
+  }
+
+  /* Additional styles for upgrades section */
+  .upgrades .upgrade-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .upgrades .upgrade-item {
+    flex: 0 0 calc(50% - 10px);
+    background-color: rgb(67, 193, 235);
+    color: black;
+    padding: 10px;
+    text-align: center;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+    margin: 5px;
+  }
+
+  .upgrades .upgrade-item img {
+    width: 100%;
+    height: auto;
+  }
 }

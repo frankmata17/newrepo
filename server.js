@@ -23,6 +23,8 @@ app.set("layout", "./layouts/layout")
  * Routes
  *************************/
 app.use(require("./routes/static"))
+app.use(express.static('public'));
+
 
 //Index route
 // localhost:5500
