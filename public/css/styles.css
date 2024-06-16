@@ -4,3 +4,75 @@
 *:after {
   box-sizing: border-box;
 }
+
+body {
+  font-family: Arial, sans-serif;
+  background-image: url('/newrepo/public/images/site/checkerboard.jpg');
+  background-repeat: repeat;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+h1 {
+  color: #333;
+}
+
+h2 {
+  margin: 0;
+}
+
+nav {
+  background-color: black;
+  color: white;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  padding: 10px;
+}
+
+.delorean-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.delorean {
+  max-width: 50%;
+  height: auto;
+}
+
+.delorean-info {
+  text-align: left;
+  padding-left: 20px;
+}
+
+.upgrades, .reviews {
+  margin: 20px 0;
+}
+
+.upgrades .upgrade-items {
+  display: flex;
+  justify-content: space-around;
+}
+
+.upgrade-item {
+  text-align: center;
+}
+
+.upgrade-item img {
+  width: 100px;
+  height: 100px;
+}
+
+footer {
+  background-color: black;
+  color: white;
+  padding: 10px;
+}
