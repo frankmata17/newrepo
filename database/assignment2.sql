@@ -10,7 +10,7 @@ DELETE FROM account
 WHERE first_name = 'Tony' AND last_name = 'Stark';
 --4
 UPDATE inventory
-SET description - REPLACE(description, 'small interiors', 'a huge interior')
+SET description = REPLACE(description, 'small interiors', 'a huge interior')
 WHERE make = 'GM' AND model = 'Hummer';
 --5
 SELECT i.make, i.model, c.classification_name
