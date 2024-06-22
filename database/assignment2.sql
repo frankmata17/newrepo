@@ -1,19 +1,19 @@
 -- 1
-INSERT INTO account (first_name, last_name, email, password)
+INSERT INTO account (account_firstname, account_lastname, account_email, account_password)
 VALUES ('Tony', 'Stark', 'tony@starkent.com', 'Iam1ronM@n');
 --2
 UPDATE account
-SET account_type = 'Admin'
-WHERE first_name = 'Tony' AND last_name = 'Stark';
+SET account_types = 'Admin'
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
 --3
 DELETE FROM account
-WHERE first_name = 'Tony' AND last_name = 'Stark';
---4
+WHERE account_firstname = 'Tony' AND account_lastname = 'Stark';
+-- 4
 UPDATE inventory
-SET description = REPLACE(description, 'small interiors', 'a huge interior')
-WHERE make = 'GM' AND model = 'Hummer';
+SET inv_description = REPLACE(inv_description, 'small interiors', 'a huge interior')
+WHERE inv_make = 'GM' AND inv_model = 'Hummer';
 --5
-SELECT i.make, i.model, c.classification_name
+SELECT i.inv_make, i.inv_model, c.classification_name
 FROM inventory i
 INNER JOIN classification c ON i.classification_id = c.classification_id
 WHERE c.classification_name = 'Sport';
