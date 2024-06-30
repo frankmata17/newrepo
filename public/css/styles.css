@@ -54,6 +54,30 @@ nav a {
   padding: 10px;
 }
 
+nav a:hover {
+  text-decoration: underline; /* Optional: Add underline on hover */
+}
+
+#top-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: black;
+  color: white;
+}
+
+#top-header .siteName a {
+  color: white;
+  text-decoration: none;
+  font-size: 24px;
+}
+
+#top-header #tools a {
+  color: white;
+  text-decoration: none;
+}
+
 main {
   max-width: 1200px;
   margin: 0 auto;
@@ -142,6 +166,21 @@ footer {
   margin-bottom: 10px;
 }
 
+.vehicle-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.vehicle-detail img {
+  max-width: 100%;
+  height: auto;
+}
+
+.vehicle-info {
+  flex: 1;
+  padding: 20px;
+}
+
 @media (max-width: 600px) {
   .sections-container {
     display: flex;
@@ -199,5 +238,8 @@ footer {
   .upgrades .upgrade-item img {
     width: 100%;
     height: auto;
+  }
+  .vehicle-container {
+    flex-direction: column;
   }
 }
