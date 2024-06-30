@@ -12,7 +12,7 @@ const env = require("dotenv").config();
 const app = express();
 const staticRoutes = require("./routes/static");
 const baseController = require("./controllers/baseControllers");
-const errorRoutes = require("./routes/errorRoute"); // Import error routes
+const errorRoutes = require('./routes/errorRoute');
 const errorHandler = require("./middleware/errorHandler");
 
 /* ***********************

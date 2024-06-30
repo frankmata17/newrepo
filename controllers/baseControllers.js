@@ -1,66 +1,27 @@
 // controllers/baseControllers.js
-
-const utilities = require("../utilities");
-const Inventory = require('../models/inventory-model');
+const pool = require('../database/database'); // Adjust the path as per your directory structure
 
 const baseController = {};
 
-// Method for rendering the home page
-baseController.buildHome = async function(req, res) {
-  try {
-    const nav = await utilities.getNav();
-    res.render("index", { title: "Home", nav });
-  } catch (error) {
-    console.error('Error rendering home page:', error);
-    res.status(500).send('Server Error');
-  }
-};
-
-// Method for rendering vehicle details
 baseController.getVehicleDetails = async (req, res) => {
   try {
     const vehicleId = req.params.id;
-    const vehicle = await Inventory.getVehicleById(vehicleId);
+    const query = 'SELECT * FROM inventory WHERE inv_id = $1';
+    const { rows } = await pool.query(query, [vehicleId]);
 
-    if (!vehicle) {
+    if (rows.length === 0) {
       return res.status(404).send('Vehicle not found');
     }
 
-    const vehicleHTML = utilities.wrapVehicleInfoInHTML(vehicle);
+    const vehicle = rows[0];
     res.render('inventory/vehicleDetail', {
-      title: `${vehicle.make} ${vehicle.model}`,
-      vehicleHTML
+      title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      vehicleHTML: utilities.wrapVehicleInfoInHTML(vehicle)
     });
   } catch (error) {
     console.error('Error fetching vehicle details:', error);
     res.status(500).send('Server Error');
   }
-};
-
-// Method for rendering vehicles by classification type
-baseController.getVehiclesByType = async (req, res) => {
-  try {
-    const classificationId = req.params.id;
-    const vehicles = await Inventory.getVehiclesByClassification(classificationId);
-
-    if (!vehicles || vehicles.length === 0) {
-      return res.status(404).send('Vehicles not found for this classification');
-    }
-
-    res.render('inventory/classification', {
-      title: 'Vehicles by Classification',
-      vehicles
-    });
-  } catch (error) {
-    console.error('Error fetching vehicles by classification:', error);
-    res.status(500).send('Server Error');
-  }
-};
-
-// Intentional error route handler
-baseController.generateError = (req, res, next) => {
-  const err = new Error('Intentional error for testing');
-  next(err);
 };
 
 module.exports = baseController;
