@@ -1,5 +1,6 @@
 // controllers/baseControllers.js
-const pool = require('../database/database'); // Adjust the path as per your directory structure
+const pool = require('../database/database');
+const utilities = require('../utilities');
 
 const baseController = {};
 
@@ -14,12 +15,27 @@ baseController.getVehicleDetails = async (req, res) => {
     }
 
     const vehicle = rows[0];
+    const nav = await utilities.getNav();
     res.render('inventory/vehicleDetail', {
       title: `${vehicle.inv_make} ${vehicle.inv_model}`,
+      nav,
       vehicleHTML: utilities.wrapVehicleInfoInHTML(vehicle)
     });
   } catch (error) {
     console.error('Error fetching vehicle details:', error);
+    res.status(500).send('Server Error');
+  }
+};
+
+baseController.buildHome = async (req, res) => {
+  try {
+    const nav = await utilities.getNav();
+    res.render('index', {
+      title: 'Home',
+      nav
+    });
+  } catch (error) {
+    console.error('Error building home page:', error);
     res.status(500).send('Server Error');
   }
 };
