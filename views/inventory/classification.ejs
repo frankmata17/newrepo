@@ -1,0 +1,18 @@
+<!-- inventory/classification.ejs -->
+
+<h1><%= title %></h1>
+
+<nav>
+  <!-- Render navigation if needed -->
+  <%- nav %>
+</nav>
+
+<div class="vehicles-list">
+  <% vehicles.forEach(vehicle => { %>
+    <div class="vehicle">
+      <h2><%= vehicle.make %> <%= vehicle.model %></h2>
+      <p>Year: <%= vehicle.year %></p>
+      <!-- Add more vehicle details as needed -->
+    </div>
+  <% }); %>
+</div>

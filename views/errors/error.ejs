@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <%- include('../partials/head') %>
+    <title><%= title %></title>
+</head>
+<body>
+    <div id="wrapper">
+        <%- include('../partials/header') %>
+        <%- include('../partials/navigation') %>
+        <main>
+            <h1><%= title %></h1>
+            <div class="error-message">
+                <%- message %>
+            </div>
+            <p>Oops! Something went wrong. But don't worry, we're on it!</p>
+            <p>Meanwhile, you might want to <a href="/">go back to the homepage</a>.</p>
+        </main>
+        <%- include('../partials/footer') %>
+    </div>
+</body>
+</html>
