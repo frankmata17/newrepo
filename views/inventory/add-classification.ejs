@@ -1,0 +1,45 @@
+<!-- views/inventory/add-classification.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Classification</title>
+    <!-- Include any necessary CSS files -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Add New Classification</h1>
+        </header>
+
+        <!-- Flash messages area -->
+        <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+            <div class="messages">
+                <% messages.forEach(message => { %>
+                    <p><%= message %></p>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <!-- Form for adding a new classification -->
+        <form action="/inventory/add-classification" method="POST">
+            <div class="form-group">
+                <label for="classificationName">Classification Name:</label>
+                <input type="text" id="classificationName" name="classificationName" required>
+            </div>
+            <button type="submit">Add Classification</button>
+        </form>
+
+        <!-- Additional content can be added here as needed -->
+
+    </div>
+    <!-- Include any necessary JavaScript files -->
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,36 @@
+<!-- views/inventory/management.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inventory Management</title>
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Inventory Management</h1>
+        </header>
+
+        <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+            <div class="messages">
+                <% messages.forEach(message => { %>
+                    <p><%= message %></p>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <div class="links">
+            <a href="/inventory/add-classification">Add New Classification</a>
+            <a href="/inventory/add-inventory">Add New Inventory Item</a>
+        </div>
+
+    </div>
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>

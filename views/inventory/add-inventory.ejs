@@ -1,0 +1,81 @@
+<!-- views/inventory/add-inventory.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add New Inventory Item</title>
+    <!-- Include any necessary CSS files -->
+    <link rel="stylesheet" href="/css/styles.css">
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <h1>Add New Inventory Item</h1>
+        </header>
+
+        <!-- Flash messages area -->
+        <% if (typeof messages !== 'undefined' && messages.length > 0) { %>
+            <div class="messages">
+                <% messages.forEach(message => { %>
+                    <p><%= message %></p>
+                <% }); %>
+            </div>
+        <% } %>
+
+        <!-- Form for adding a new inventory item -->
+        <form action="/inventory/add-inventory" method="POST">
+            <div class="form-group">
+                <label for="make">Make:</label>
+                <input type="text" id="make" name="make" value="<%= typeof formData !== 'undefined' ? formData.make : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="model">Model:</label>
+                <input type="text" id="model" name="model" value="<%= typeof formData !== 'undefined' ? formData.model : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="year">Year:</label>
+                <input type="text" id="year" name="year" value="<%= typeof formData !== 'undefined' ? formData.year : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="description">Description:</label>
+                <textarea id="description" name="description" required><%= typeof formData !== 'undefined' ? formData.description : '' %></textarea>
+            </div>
+            <div class="form-group">
+                <label for="image">Image URL:</label>
+                <input type="text" id="image" name="image" value="<%= typeof formData !== 'undefined' ? formData.image : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="thumbnail">Thumbnail URL:</label>
+                <input type="text" id="thumbnail" name="thumbnail" value="<%= typeof formData !== 'undefined' ? formData.thumbnail : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="number" id="price" name="price" value="<%= typeof formData !== 'undefined' ? formData.price : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="miles">Miles:</label>
+                <input type="number" id="miles" name="miles" value="<%= typeof formData !== 'undefined' ? formData.miles : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="color">Color:</label>
+                <input type="text" id="color" name="color" value="<%= typeof formData !== 'undefined' ? formData.color : '' %>" required>
+            </div>
+            <div class="form-group">
+                <label for="classification">Classification:</label>
+                <%= classificationList %>
+            </div>
+            <button type="submit">Add Inventory Item</button>
+        </form>
+
+        <!-- Additional content can be added here as needed -->
+
+    </div>
+    <!-- Include any necessary JavaScript files -->
+    <script src="/js/scripts.js"></script>
+</body>
+
+</html>

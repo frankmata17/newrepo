@@ -1,38 +1,36 @@
-// controllers/invController.js
+// controllers/inventoryController.js
 
-const pool = require('../database/database');
-const utilities = require('../utilities');
+const { getClassifications, addNewClassification } = require('../models/inventory-model');
 
-// Function to get vehicles by classification ID
-async function getVehiclesByClassificationId(classificationId) {
-  try {
-    const query = 'SELECT * FROM vehicles WHERE classification_id = $1';
-    const { rows } = await pool.query(query, [classificationId]);
-    return rows;
-  } catch (error) {
-    console.error('Error fetching vehicles by classification:', error);
-    throw error; // Propagate the error for handling in higher levels
-  }
+// Controller function to render the add classification form
+function renderAddClassification(req, res) {
+    res.render('inventory/add-classification', { messages: req.flash('info') });
 }
 
-// Controller function to build view by classification ID
-async function buildByClassificationId(req, res, next) {
-  try {
-    const classificationId = req.params.classificationId;
-    let nav = await utilities.getNav();
-    const vehicles = await getVehiclesByClassificationId(classificationId);
+// Controller function to add a new classification
+async function addClassification(req, res) {
+    const { classificationName } = req.body;
 
-    res.render('inventory/classification', {
-      title: `${classificationId} Vehicles`,
-      nav,
-      vehicles,
-    });
-  } catch (error) {
-    console.error('Error building by classification:', error);
-    res.status(500).send('Server Error');
-  }
+    try {
+        // Server-side validation
+        if (!classificationName || /^\s*$/.test(classificationName)) {
+            req.flash('info', 'Classification name cannot be empty.');
+            return res.redirect('/inventory/add-classification');
+        }
+
+        // Add classification to database
+        await addNewClassification(classificationName);
+
+        // Set flash message for success
+        req.flash('info', 'New classification added successfully.');
+
+        // Redirect to management view
+        res.redirect('/inventory/management');
+    } catch (error) {
+        console.error('Error adding classification:', error);
+        req.flash('info', 'Failed to add new classification.');
+        res.redirect('/inventory/add-classification');
+    }
 }
 
-module.exports = {
-  buildByClassificationId,
-};
+module.exports = { renderAddClassification, addClassification };
