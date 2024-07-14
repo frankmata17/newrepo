@@ -1,0 +1,12 @@
+<!-- account/manage.ejs -->
+
+<% if (accountType === 'Client') { %>
+    <h2>Welcome <%= firstName %></h2>
+    <a href="/account/update/<%= clientId %>" title="Update Account Information">Update Account Information</a>
+  <% } else if (accountType === 'Employee' || accountType === 'Admin') { %>
+    <h2>Welcome <%= firstName %></h2>
+    <h3>Inventory Management</h3>
+    <p><a href="/inventory/manage" title="Manage Inventory">Manage Inventory</a></p>
+    <a href="/account/update/<%= clientId %>" title="Update Account Information">Update Account Information</a>
+  <% } %>
+  
