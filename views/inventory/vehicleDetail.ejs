@@ -1,33 +1,34 @@
-<!-- views/inventory/vehicleDetail.ejs -->
+<main>
+    <h1><%= vehicle.make %> <%= vehicle.model %></h1>
+    <div class="vehicle-detail">
+        <img src="/images/vehicles/<%= vehicle.image %>" alt="<%= vehicle.make %> <%= vehicle.model %>">
+        <div class="vehicle-info">
+            <h2>Details</h2>
+            <p><strong>Year:</strong> <%= vehicle.year %></p>
+            <p><strong>Price:</strong> $<%= vehicle.price.toLocaleString() %></p>
+            <p><strong>Mileage:</strong> <%= vehicle.mileage.toLocaleString() %> miles</p>
+            <p><strong>Description:</strong> <%= vehicle.description %></p>
+        </div>
+    </div>
+    <h2>Reviews</h2>
+<% if (reviews.length > 0) { %>
+  <ul>
+    <% reviews.forEach(review => { %>
+      <li><%= review.rating %> stars - <%= review.comment %></li>
+    <% }); %>
+  </ul>
+<% } else { %>
+  <p>No reviews yet.</p>
+<% } %>
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title><%= title %></title>
-  <link rel="stylesheet" href="/css/styles.css">
-</head>
-<body>
-  <%- include('../partials/header') %>
-  <%- include('../partials/navigation') %>
-  <main>
-    <div class="vehicle-container">
-      <%= vehicleHTML %>
-    </div>
-    <div class="related-vehicles">
-      <h2>Related Vehicles</h2>
-      <ul>
-        <% classifications.forEach(classification => { %>
-          <li>
-            <a href="/inv/type/<%= classification.classification_id %>">
-              <%= classification.classification_name %> Vehicles
-            </a>
-          </li>
-        <% }); %>
-      </ul>
-    </div>
-  </main>
-  <%- include('../partials/footer') %>
-</body>
-</html>
+<h3>Add a Review</h3>
+<form action="/reviews/post" method="POST">
+  <input type="hidden" name="vehicleId" value="<%= vehicle.id %>">
+  <label for="rating">Rating</label>
+  <input type="number" name="rating" min="1" max="5" required>
+  <label for="comment">Comment</label>
+  <textarea name="comment"></textarea>
+  <button type="submit">Submit Review</button>
+</form>
+
+</main>

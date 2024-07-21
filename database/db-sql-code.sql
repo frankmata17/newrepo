@@ -2,7 +2,7 @@ CREATE TYPE public.account_types AS ENUM
     ('Client', 'Employee', 'Admin');
 
 ALTER TYPE public.account_types
-    OWNER TO cse340;
+    OWNER TO cse3403;
 
 -- classification table
 
@@ -58,6 +58,21 @@ VALUES ('Custom'),
 	('SUV'),
 	('Truck'),
 	('Sedan');
+
+
+
+--reviews table
+
+CREATE TABLE reviews (
+  id SERIAL PRIMARY KEY,
+  vehicle_id INT NOT NULL,
+  user_id INT NOT NULL,
+  rating INT NOT NULL,
+  comment TEXT,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY (vehicle_id) REFERENCES vehicles(id),
+  FOREIGN KEY (user_id) REFERENCES users(id)
+);
 
 
 -- Data for table `inventory`
